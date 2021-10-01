@@ -97,7 +97,7 @@ def lab():
     else: AddToBag ("BAKING SODA")
     CheckInventory()
     print("\n")
-    print(f"As you're putting your {i}{take.upper}{clr} in your bag, ")
+    print(f"As you're putting your {i}{take.upper()}{clr} in your bag, ")
     print(f"{think}you notice an opening through which you can barely make out the shadows of grass")
     print("You walk out the door to settle on some more ruins.")
     print("Suddenly, you get the creepy feeling someone is watching you.")
@@ -125,9 +125,9 @@ def tower():
         print("Suddenly, you remember how to breeze caught that fabric in your bag.")
         use = input ("Do you use the fabric to JUMP or go back and use the STAIRS? ")
         print("\n")
-        if use.upper == "JUMP":
+        if use.upper()== "JUMP":
             jump()
-        elif use.upper == "STAIRS":
+        elif use.upper()== "STAIRS":
             lab()
         else: NonRoom()
 
@@ -188,9 +188,9 @@ def torch():
     print("As you search the tower ruins, you don’t see much besides ")
     print("a walkway leading to another tower nearby and the crumbling remains of STAIRS")
     room = input("Do you go to the other TOWER or try going down the STAIRS? ")
-    if room.upper == "STAIRS":
+    if room.upper()== "STAIRS":
         lab()
-    elif room.upper == "TOWER":
+    elif room.upper()== "TOWER":
         tower()
     else: NonRoom()
 
@@ -204,9 +204,9 @@ def jump():
     print("You’re in awe of the lush gardens until, suddenly, you hit the ground.")
     print("As you spit out the mouthful of grass, you get the eerie feeling someone is watching you. ")
     room = input(f">>{u}{i}SEARCH{clr}{i} the nearby ruins for a weapon or {u}EXPLORE{clr}{i} the gardens?{clr}")
-    if room.upper == "SEARCH":
+    if room.upper()== "SEARCH":
         ruins()
-    elif room.upper == "EXPLORE":
+    elif room.upper()== "EXPLORE":
         gardens()
     else: NonRoom()
 
@@ -218,11 +218,11 @@ def wrap():
     print("What else looks useful in your satchel?")
     print(bag)
     use = input("What item do you try now? ")
-    if use.upper == "FABRIC":
+    if use.upper()== "FABRIC":
         fabric()
-    elif use.upper == "TORCH":
+    elif use.upper()== "TORCH":
         torch()
-    elif use.upper == "BOTTLE":
+    elif use.upper()== "BOTTLE":
         bottle()
     else: NonItem()
 
