@@ -98,7 +98,7 @@ def lab():
     CheckInventory()
     print("\n")
     print(f"As you're putting your {i}{take.upper}{clr} in your bag, ")
-    print("you notice an opening through which you can barely make out the shadows of grass")
+    print(f"{think}you notice an opening through which you can barely make out the shadows of grass")
     print("You walk out the door to settle on some more ruins.")
     print("Suddenly, you get the creepy feeling someone is watching you.")
     room = input ("Do you want to SEARCH the ruins for a weapon or EXPLORE the gardens?")
