@@ -1,9 +1,13 @@
+# While in the lab (access using "torch" then "stairs,") there is a hidden option! 
+# You can type "all" to grab all items into your satchel. You greedy fella, you.
+
 bag=[]
 u = "\033[4m"
 b = "\033[1m"
 i = "\033[3m"
 think = "\033[38;5;111m"
 grock = "\033[38;5;48m"
+gold = "\033[38;5;136m"
 clr = "\033[0m"
 def line():
     print("\n")
@@ -51,8 +55,8 @@ def start():
     line()
     print("--------------------------------------------------------------------------------------")
     line()
-    print(f"{think}{i}...ouch...my head...everything is blurry...")
-    print(f"...am I...in a castle tower? Why am I laying on all this rubble...{clr}")
+    print(f"{think}{i}    ...ouch...my head...everything is blurry...")
+    print(f"    ...am I...in a castle tower? Why am I laying on all this rubble...{clr}")
     line()
     print(f"{grock}OH 'EY THERE, LITTLE FELLER!")
     print(f"I DIDN'T THINK YEH'D EVER WAKE UP!")
@@ -63,7 +67,7 @@ def start():
     print(f"{grock}I'm {b}{i}Grock{clr}{grock}. But there's no time for pleasentries, you've gotta git goin'!")
     print(f"I see Princess Etheria's bag decided teh show itsself to yeh.{clr}")
     line()
-    print(f"{think}{i}bag? - Wha-where did this satchel come from?! None of this makes sense{clr}")
+    print(f"{think}{i}    bag? I don't have a--Wha-where did this satchel come from?! None of this makes sense{clr}")
     print(f"{think}Sorry, but who's Princess--{clr}{grock}I SAID THERE'S NO TIME! Now pick an item from the bag and GIT GOIN!")
     print(f"I'll catch up with yeh later. I have teh tell Astral yer finally here!{clr}")
     line()
@@ -79,29 +83,35 @@ def start():
         
 def lab():
     print("\n")
-    print(f"{think}{i}slow...careful...I can't believe I made it all the way down!{clr}")
+    print(f"{think}{i}    slow...careful...*whew* I can't believe I made it all the way down!{clr}")
     print("\n") 
     print(f"You look around as you set your torch into a sconce.")
-    print(f"{think}{i} what is this room? an old Apothecary lab?{clr}")
-    print("The light reveils a shelf nearby and the oddly shaped jars catch your eye.")
-    print(f"{think}{i}I should take something in just in case, but I don't want my bag to get too heavy")
-    print(f"...let's see...Squid {u}TOES{clr}{think}, {i}Powdered {u}WATER{clr}{think} and {i}Baking {u}SODA.{clr}")
-    print("\n")
-    take = input(f">>{u}Which do you take?{clr} ")
+    print(f"{think}{i}    what is this room? an old Apothecary lab?{clr}")
+    print("The light reveals a shelf nearby and the oddly shaped jars catch your eye.")
+    print(f"{think}{i}    I should take something just in case, but I don't want my bag to get too heavy")
+    line()
+    print(f"    I'll just take one...let's see...Squid {u}TOES{clr}{think}, {i}Powdered {u}WATER{clr}{think} and {i}Baking {u}SODA.{clr}")
+    take = input(f">>{u}Which do you take?{clr}{think} ")
     if take.upper() == "TOES":
         AddToBag ("SQUID_TOES")
     elif take.upper() == "WATER":
         AddToBag ("POWDERED_WATER")
     elif take.upper() == ("SODA"):
         AddToBag ("BAKING_SODA")
+    elif take.upper() == ("ALL"):
+        print(f"{think}{i}    aw heck, why not take 'em all?!{clr}")
+        AddToBag("WATER")
+        AddToBag("POWDERED_WATER")
+        AddToBag("BAKING_SODA")
     else: AddToBag ("BAKING SODA")
     CheckInventory()
     print("\n")
-    print(f"As you're putting your {i}{take.upper()}{clr} in your bag, ")
-    print(f"{think}you notice an opening through which you can barely make out the shadows of grass")
-    print("You walk out the door to settle on some more ruins.")
+    print(f"As you're putting {i}{take.upper()}{clr} in your bag, ")
+    print(f"You look over your shoulder.   {think}{i}Where did that doorway come from!? Is that the castle yards out there?{clr}")
+    print("You grab the TORCH and walk out the crumbling doorway.")
+    line()
     print("Suddenly, you get the creepy feeling someone is watching you.")
-    room = input ("Do you want to SEARCH the ruins for a weapon or EXPLORE the gardens?")
+    room = input (f"{u}Do you want to {i}SEARCH{clr}{u} the ruins for a weapon or {i}EXPLORE{clr}{u} the gardens?{clr}{think} ")
     if room.upper() == "SEARCH":
         ruins()
     elif room.upper() == "EXPLORE":
@@ -109,15 +119,15 @@ def lab():
     else: NonRoom()
     
 def tower():
-    print("You walk down the narrow, cold stone pathway and enter the other tower.")
-    print("By the bright light of the torch, you can see a scorched portrait on the tower wall.")
-    print("Princess Etherea Chimericus: Keeper of the Dreams") 
-    print("you can barely make out the faint engraving")
-    print("on the small gold plaque under the large frame. ")
-    print("\n")
-    print("'Keeper of Dreams?' you wonder and your focus drops to the ground.")
+    print(f"As you're walking down the path, you observe the wreckage around you.")
+    print(f"You reach the other tower. {think}{i}   ...a bedroom?{clr}")
+    print(f"You hold the torch up to light up a portrait.")
+    line()
+    print(f"{gold}{i}Princess Etherea Chimericus: Keeper of the Dreams{clr}") 
+    line()
+    print("As you wonder what all this means, your gaze drops to the ground.")
     print("On the ruin ground, just in front of your foot, your eyes catch the glint")
-    take = input("of a gold coin. TAKE the coin or LEAVE it there?")
+    take = input("of a gold coin. {i}{u}TAKE{clr} the coin or {u}{i}LEAVE it there?{clr}{think} ")
     if take.upper() == "TAKE":
         AddToBag ("GOLD_COIN")
     else:
@@ -130,12 +140,15 @@ def tower():
         elif use.upper()== "STAIRS":
             lab()
         else: NonRoom()
+    CheckInventory()
 
 def ruins():
-    print("Leading with the torch to ward off anything dangerous from approaching you, you cautiously look around the ruins.")
+    line()
+    print(f"Leading with the torch to ward off anyone (or any{i}thing{clr}) from approaching you, you step to the ruins.")
     print("Trying to make as little noise as possible, you carefully turn over the large stones that were once fortress walls.")
     print("Out of the corner of your eye, you see the lit torch reflecting back at you.")
-    print("A sword!")
+    line()
+    print(f"{i}A sword!{clr}")
     print("Somehow it fits into your new magic satchel and you feel much safer going to explore the gardens.")
     AddToBag("SWORD")
     print("\n")
