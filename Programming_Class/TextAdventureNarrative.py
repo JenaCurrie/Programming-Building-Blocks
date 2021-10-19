@@ -4,6 +4,7 @@
 from os import system
 bag=[]
 
+
 u = "\033[4m"
 b = "\033[1m"
 i = "\033[3m"
@@ -29,7 +30,7 @@ def RemoveFromBag (item):
 
 def CheckInventory():
     print(f"\n{clr}{i}Your bag has: ")
-    print(*bag,sep=",")
+    print(*bag,sep=", ")
     
     
 
@@ -70,7 +71,7 @@ def start():
     print(f"the sun's about teh start risin' so you've gotta git goin'!")
     print(f"{clr}His eyes drop to your hip")
     print(f"{grock}I see Princess Etheria's bag decided teh show itself to yeh.{clr}")
-    print(f"{think}{i}    ...what bag is he talking about? I don't have a--Wha-where did this satchel come from?!")
+    print(f"{think}{i}    ...what bag is he talking about? I don't carry a--Wha-where did this satchel come from?!")
     print(f"    None of this makes sense{clr}")
     print(f"{think}Sorry, but who's Princess--{clr}{grock}I SAID THERE'S NO TIME! Now pick an item from the bag and GIT GOIN!")
     print(f"I'll catch up with yeh later. I have teh tell {i}Astral{clr}{grock} yer finally here!{clr}\n")
@@ -245,17 +246,17 @@ def shack():
     clear()
     print(f"\n{clr}As you approach the drawbridge, you see an old, dilapidated shack come into view.")
     print(f"You cautiously approach the remains of what was once a doorway.\n")
-    room = input (f">> {u}ENTER?{clr} {think}")
-    if room.upper() == "NO":
+    room = input (f">> {u}ENTER? (Y/N){clr} {think}")
+    if room.upper() in "NO" "N":
         print(f"{clr}Just as you're about to turn away, you hear a frail, unfamiliar voice.")
     print(f"{astral}{name.capitalize()}, You've finally made it.{clr}")
     print(f"As you step further into the dilapidated shack, you see the dull twilight reveal a small figure in the corner.")
-    print("Her back is toward you, but this isn't the wierdest thing that's happened today, so you answer her.")
+    print("Her back is toward you, but this isn't the wierdest thing that's happened today, so you answer her.\n")
     print(f"{think}I guess so? Where am I? How did I get here?...and how do I get home?{clr}")
     print("-------------------------------------------------------------")
     print(f"{astral}Oh, {name.capitalize()}. That's a long story.")
     story = input(f">> {u}Are you sure you want to hear the whole thing?{clr} {i}{u}YES{clr}{i} or {u}NO{clr} {think}")
-    if story.upper() =="YES":
+    if story.upper() in "Y" "YES":
         clear()
         print(f"{astral}I like a hero who cares. Take a {i}GOLD COIN{clr}{astral} off that table for your kindness.\n")
         AddToBag ("GOLD_COIN")
@@ -270,7 +271,8 @@ def shack():
         print(f"     She was an evil woman who wasn’t satisfied just taking away Princess Etherea’s sacred right to distribute dreams to the kingdom, ") 
         print(f"     she also had to take the princess with her.  ") 
         print(f"     Without Etherea’s dreams, we have been stuck in perpetual cognizance for 300 years. \n") 
-        
+    elif story.upper() in "N" "NO":
+        clear()   
     print(f"{astral}Now {name.capitalize()}, I'm sure you'd like to get home. ")
     print(f"I know it may sound odd, but you need to make a {pie}Dream Cream Pie{clr}{astral} before dawn today")
     print(f"to restore our ability to sleep and allow time to continue turning here in Lunashire.")
@@ -278,9 +280,9 @@ def shack():
     print(f"{astral}Now that Etheria's satchel chose you, you had all the tools to harvest the ingredients. ")
     print(f"But to free us from this curse, the {pie}Dream Cream Pie {clr}{astral}has to be made before the dawn of the ")
     print(f"morn marking exactly 300 years since the Princess disapeared.")
-    print(f"I'm sure you've gathered...when the sun rises today, it will be exactly 300 years.\n")
+    print(f"I'm sure you've gathered...when the sun rises today, it will be exactly 300 years.{clr}\n")
     
-    recipe = input(f">> {clr}{u}{i}ASK{clr}{u} for the recipe or {i}CHECK{clr}{u} your bag for ingredients?{clr} {think}")
+    recipe = input(f">> {u}{i}ASK{clr}{u} for the recipe or {i}CHECK{clr}{u} your bag for ingredients?{clr} {think}")
     clear()
     if recipe.upper() == "ASK":
         title = f"{pie}Dream Cream Pie"
@@ -302,16 +304,36 @@ def shack():
         print(fill.center(75,"-"))
     
     print(f"\n{astral}Let's see how many ingredients you were able to collect on your way here.{clr}")
-    check = input(f"{clr}{u}Show Astral inside your bag? Y/N:{clr}{think}  ")
-    if check.upper == "YES" or "Y":
+    show_ingredients = input(f"{clr}>> {u}Show Astral inside your bag? {i}Y/N:{clr}{think}  ")
+    if show_ingredients.upper == "YES" or "Y":
         clear()
         CheckInventory()
-        if "POWDERED_WATER" in bag:
-            print(f"{astral}AH, YES! {name.upper()}! YOU WERE ABLE TO HARVEST THE POWDERED WATER!")
-            print(f"{astral}Only the flame of Princess Etheria's magic torch can powder the water shed from the Great Lunashire Phalange Squid.")
-            montage()
-        else:
-            fail_1()
+        if "POWDERED_WATER" in bag: 
+            if "SQUID_TOES" in bag and "BAKING_SODA" in bag:
+                print(f"{astral}AH, YES! {name.upper()}! YOU WERE ABLE TO HARVEST THE POWDERED WATER!")
+                print(f"{astral}Only the flame of Princess Etheria's magic torch can powder the water shed from the Great Lunashire Phalange Squid.")
+                print(f"{astral}Let's start baking!")
+                montage()
+            elif (("SQUID_TOES" not in bag and "BAKING_SODA" not in bag) and bag.count("GOLD_COIN") <=1) or (("SQUID_TOES" not in bag or "BAKING_SODA" not in bag) and bag.count("GOLD_COIN") <1) :
+                print(f"{astral}I see you're still missing some of the other ingredients.")
+                print(f"I have some extras in that coin machine but you don't have enough GOLD COINS for both ingredients!\n")
+                fail_1()
+            elif ("SQUID_TOES" not in bag or "BAKING_SODA" not in bag) and bag.count("GOLD_COIN") >=1 :
+                print(f"{astral}Oh good! I see you have enough coins for your missing ingredient!")
+                print(f"{clr}You head over to the coin machine with the ingredient you're missing and put in your coin")
+                print(f"The vial falls to the bottom and you lift the flap to get it out")
+                RemoveFromBag ("GOLD_COIN")
+                montage()
+            elif bag.count("SQUID_TOES" "BAKING_SODA") <1 and bag.count("GOLD_COIN") >=2:
+                print(f"{astral}Oh good! I see you have enough coins for your missing ingredient!")
+                print(f"{clr}You head over to the coin machine with the ingredient you're missing and put in your coin")
+                print(f"The vial falls to the bottom and you lift the flap to get it out")
+                RemoveFromBag ("GOLD_COIN")
+                RemoveFromBag ("GOLD_COIN")
+                montage()
+        elif "POWDERED_WATER" not in bag:
+            print(f"{astral}Oh, {name.upper()}! You don't have any POWDERED WATER! That was the one ingredient I can't help you with.")
+            fail_1()   
     else:
         fail_2()
 
@@ -334,9 +356,9 @@ def bottle():
     print(f"\n{clr}Right as you grasp the small bottle, a bird swoops just overhead.")
     print(f"{think}AH!{clr} {i}*CRASH*{clr} you look down and see...")
     print(f"{think}{i}    Welp...I hope that bottle wasn’t going to come in handy later on.\n")
-    print(f"What's left in this satchel? {clr}")
-    print(*bag,sep=",")
-    use = input(f"{clr}Which one do you try next? {think}")
+    print(f"    What's left in this satchel? {clr}")
+    print(*bag,sep=", ")
+    use = input(f"{clr}>> {u}Which one do you try next?{clr} {think}")
     if use.upper() == "TORCH":
         torch()
     elif use.upper() == "FABRIC":
@@ -464,9 +486,8 @@ def wrap():
 """ENDINGS"""
 
 def fail_1():
-    clear()
-    print(f"{astral}Oh, {name.upper()}! You don't have any POWDERED WATER!")
-    print(f"{name.capitalize()}, you've failed Lunashire. That was the one ingredient I can't help you with.\n")
+    print(f"{name.capitalize()}, you've failed Lunashire.")
+    print(f"And now it's too late because the sun rising!\n")
         
     print(f"{clr}Your heart starts beating faster as you think of the people of Lunashire")
     print(f"being stuck for another 300 years waiting for a hero who WON'T fail them.\n")
@@ -495,13 +516,12 @@ def fail_2():
     print(f"{think}{i}{b}What a bazaar dream.\n")
 
 def montage():
-    clear()
     print(f"{pie}------*QUE MONTAGE*------")
     print(f"-----------------------------------")
-    print(f"    ....gather ingredients....")
+    print(f"    {i}....gather ingredients....")
     print(f"    ....make squid toes dance....")
     print(f"    ....heartfelt conversation....")
-    print(f"    ....frollic through gardens....{clr}\n")
+    print(f"    ....frollic through gardens in slow motion....{clr}\n")
     print(f"{astral}{name.capitalize()}?...{name.upper()}?...{name.upper()}!{clr}")
     print(f"{think}WHAT!? ...oh is it done!?")
     print(f"{astral}It's finished, {name.capitalize()}. Now the hero needs to take a bite before sunrise")
@@ -511,10 +531,11 @@ def montage():
         end_win()
     elif end.upper() == "REFUSE":
         fail_2()
+    else:
+        end_win()
 
 def end_win():
     clear()
-    coin_count= bag.count('GOLD_COIN')
     print(f"{clr}{think}{i}    I know what ingredients went into this pie...there's no way it smells this good!\n")
     print(f"{clr}You lean over the warm, whipped, creamy pie and take the biggest bite possible")
     print(f"    {i}You close your eyes in complete bliss")
@@ -526,14 +547,13 @@ def end_win():
     print(f"As you pass by the mirror, you notice something...")
     print(f"{think}{i}    Is that...whipped pie on my face??")
     print(f"{clr}You instictively reach into your pajama pockets and feel...")
-    print(f"{think}{i}   ...{coin_count} gold coins!")
+    print(f"{think}{i}   ...{bag.count('GOLD_COIN')} gold coins!")
 
 
 
 AddToBag ('FABRIC')
 AddToBag ('TORCH')
 AddToBag ('BOTTLE')
-AddToBag ('POWDERED_WATER')
 
 """START"""
 
@@ -545,4 +565,7 @@ print(f"{grock}OH 'EY THERE, LITTLE FELLER!")
 print(f"I DIDN'T THINK YEH'D EVER WAKE UP!")
 print(f"We don't get many outsiders visitin' Lunashire anymore.")
 name = input(f">> {u}Can I ask ye what yur name is, feller?{clr}{think} ")
+if name.upper() in "Y"  "YES"  "SURE":      #Watching my dad try to play through alerted me to this necessary option...
+    print(f"{clr}{grock}\nHA, got a bit of a sense o' humor, don'tcha?")
+    name = input(f">> {u}What should I call yah?{clr}{think} ")
 start()
