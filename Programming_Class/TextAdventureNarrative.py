@@ -118,7 +118,7 @@ def lab():
     print(f"\nAs you're putting {i}{take.upper()}{clr} in your bag, You look over your shoulder ")
     print("toward shadows you hadn't noticed before.")
     print(f"   {think}{i}It's twilight. Grock said I need to figure this out before dawn.")
-    print("    Is that the castle yards?{clr}")
+    print(f"   Is that the castle yards?{clr}")
     print("You grab the TORCH, put it back in your bag and walk out the crumbling doorway.\n")
     print("Suddenly, you get the eerie feeling someone is watching you.")
     room = input (f">> {u}Do you want to {i}SEARCH{clr}{u} the ruins for a weapon or {i}EXPLORE{clr}{u} the gardens?{clr}{think} ")
@@ -416,7 +416,7 @@ def sword_squid():
     print("You look down at the ground and can't help but laugh")
     print(f"{think}{i}    Is that...TOES on these tentacles?!")
     take = input (f"{clr}>> {u}Take the {i}SQUID TOES{clr}{u}?(Y/N){clr} {think}")
-    if take.upper() == "Y" "YES" "TOES":
+    if take.upper() in "Y" "YES" "TOES":
         clear()
         print(f"    I have to take these to show my friends when I get home.{clr}")
         AddToBag ("SQUID_TOES")
@@ -424,7 +424,7 @@ def sword_squid():
     else:
         clear()
         print(f"{clr}You leave the nasty, slimey toes...but you can't help taking a closer look")
-    print(f"\nYou pull out the torch to get a better look at the toed tentacle.")
+    print(f"\nYou pull out the magic torch to get a better look at the toed tentacle.")
     print(f"As you move the flame closer, you see some water instantly turn into a wierd powder.")
     if "BOTTLE" in bag:
         print(f"{think}{i}    ...What is this?! ")
@@ -438,10 +438,10 @@ def sword_squid():
             print(f"\n{think}{i}    I need to figure out how to get home.")
             print(f"    let's walk toward the drawbridge to see what's over there.{clr}")
             room = input (f">> {u}Walk to the drawbridge PATH?{clr}(Y/N) {think}")
-            if room.upper() == "Y" "YES" "PATH":
+            if room.upper() in "Y" "YES" "PATH":
                 shack()
             else:
-                NonRoom()
+                path()
     elif "BOTTLE" not in bag:
         print(f"{think}{i}    ...I bet that broken bottle would have come in handy right about now.")
         print(f"{think}{i}    I need to figure out how to get home.")
